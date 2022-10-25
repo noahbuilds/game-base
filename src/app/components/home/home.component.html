@@ -1,0 +1,31 @@
+<div class="filters">
+    <mat-form-field>
+        <mat-label>Sort</mat-label>
+        <mat-select [(ngModel)]="sort" placeholder="">
+            <mat-option value="Name">Name</mat-option>
+            <mat-option value="Released"> Released</mat-option>
+            <mat-option value="Added"> Added</mat-option>
+            <mat-option value="Created"> Created</mat-option>
+            <mat-option value="Updated"> Updated</mat-option>
+            <mat-option value="Rating"> Rating</mat-option>
+            <mat-option value="Matacritic"> Matacritic</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="games">
+
+    <div class="game">
+        <div class="game-thumb-container">
+            <img src="" alt="thumbnail" class="game-thumbnail" />
+
+        </div>
+        <div class="game-description">
+            <p class="game-name">Name</p>
+            <div class="game-platforms">
+                <img class="game-platform" src="assets/images/platforms/android.svg" alt="" />
+            </div>
+        </div>
+    </div>
+
+</div>
