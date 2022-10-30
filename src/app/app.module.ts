@@ -15,12 +15,14 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { HomeComponent } from './components/home/home.component'
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptors';
 import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptors';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
