@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { Game } from 'src/app/models/game';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Api as ApiResponse } from 'src/app/models/api';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public sort?: string;
   public games?: Array<Game>;
+  private routeSub?: Subscription;
+  private gameSub?: Subscription;
+
 
   constructor(
     private gameService: HttpService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
+   this.routeSub= this.activatedRoute.params.subscribe((params: Params) => {
       if (params['game-search']) {
         this.searchGames('metacrit', params['game-search']);
       } else {
@@ -28,12 +34,31 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  searchGames(sort: string, search?: string) {
-    this.gameService
+  searchGames(sort: string|any, search?: string) {
+    this.gameSub= this.gameService
       .getGameList(sort, search)
       .subscribe((gameList: ApiResponse<Game>) => {
         this.games = gameList.results;
         console.log(gameList);
       });
+  }
+
+  openGameDetails(gameId:number):void{
+    this.router.navigate(['details', gameId])
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    
+    if(this.gameSub){
+      this.gameSub.unsubscribe();
+    }
+    if(this.routeSub){
+      this.routeSub.unsubscribe();
+    }
+
+   
+
   }
 }

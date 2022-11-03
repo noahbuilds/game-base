@@ -39,7 +39,29 @@
     max-width: 1200px;
     margin: 20px auto;
   }
+ .nav-btn{
+    padding: 8px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap:40px;
+    margin-top: 15px;
 
+ &-left-nav{
+        padding: 15px 40px;
+        background-color: #3f51b5;
+        border: none;
+        color: #fff;
+        border-radius: 7px;
+    }
+    &-right-nav{
+        padding: 15px 40px;
+        background-color: #3f51b5;
+        border: none;
+        color: #fff;
+        border-radius: 7px;
+    }
+    
+ }
 
   .game {
   width: 280px;
