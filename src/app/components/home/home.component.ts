@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public games?: Array<Game>;
   private routeSub?: Subscription;
   private gameSub?: Subscription;
+  public isLoading: Boolean = true;
 
 
   constructor(
@@ -37,9 +38,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   searchGames(sort: string|any, search?: string) {
     this.gameSub= this.gameService
       .getGameList(sort, search)
-      .subscribe((gameList: ApiResponse<Game>) => {
-        this.games = gameList.results;
-        console.log(gameList);
+      .subscribe({
+        next: (gameList:ApiResponse<Game>)=>{ 
+          this.games = gameList.results;
+        },
+        complete: ()=>{
+          this.isLoading = false
+           console.log('Completed task')}
+      
       });
   }
 
@@ -50,7 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    
+
     if(this.gameSub){
       this.gameSub.unsubscribe();
     }

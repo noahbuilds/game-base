@@ -19,7 +19,9 @@
   </div>
 
   <div class="games">  
-    <ng-container *ngFor="let game of games" >
+    <p *ngIf="isLoading" else elseTemplate class="game-loading"> Loading Games...</p>
+
+    <ng-container #elseTemplate *ngFor="let game of games" >
       <div class="game" (click)="openGameDetails(game.id)">
         <div class="game-thumb-container">
           <img
