@@ -19,7 +19,7 @@
   </div>
 
   <div class="games">  
-    <p *ngIf="isLoading" else elseTemplate class="game-loading"> Loading Games...</p>
+    <p *ngIf="isLoading" else elseTemplate class="game-loading-text"> Loading games </p><span class="game-loader">...</span>
 
     <ng-container #elseTemplate *ngFor="let game of games" >
       <div class="game" (click)="openGameDetails(game.id)">
@@ -52,5 +52,3 @@
    
     
   </div>
-  
-  
